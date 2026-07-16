@@ -11,17 +11,22 @@ public class Main {
         System.out.println("== 명언 앱 ==");
 
         String cmd = "";
+        int no = 1;
 
         while(!cmd.equals("종료")) {
             System.out.print("명령) ");
             cmd = sc.nextLine();
 
             if(cmd.equals("등록")) {
+
                 System.out.print("명언 : ");
                 String content = sc.nextLine();
                 System.out.print("작가 : ");
                 String author = sc.nextLine();
-                System.out.println("1번 명언이 등록되었습니다.");
+                // %d => 숫자
+                // %s => 문자열
+                System.out.println("%d번 명언이 등록되었습니다.".formatted(no));
+                ++no;
             }
         }
     }
