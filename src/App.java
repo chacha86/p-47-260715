@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class App {
 
     Scanner sc = new Scanner(System.in);
-    int lastNo = 0;
+    int lastNo = 0; // 가장 최근 생성된 명언 번호. 번호 관리
+    int lastIndex = 0; // 가장 최근 생성된 명언의 배열 인덱스. 배열 관리
     WiseSaying[] wiseSayings = new WiseSaying[10];
     // run 함수가 길다 => 길다.
     // run 함수는 길이가 적절하다. => 적절하다
@@ -23,31 +24,41 @@ public class App {
             if (cmd.equals("등록")) {
                 actionWrite(); // mac : option + enter, win : alt + enter
             }
-            if (cmd.equals("목록")) {
+            else if (cmd.equals("목록")) {
                 actionList();
             }
+            else if (cmd.equals("삭제")) {
+                actionDelete();
+            }
         }
+    }
+
+    private void actionDelete() {
+        for(int i = 1; i < lastIndex; i++) {
+            wiseSayings[i] = wiseSayings[i + 1];
+        }
+        --lastIndex;
     }
 
     private void actionList() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
-        for (int i = lastNo - 1; i >= 0; i--) {
+        for (int i = lastIndex - 1; i >= 0; i--) {
             WiseSaying target = wiseSayings[i];
             System.out.println("%d / %s / %s.".formatted(target.no, target.author, target.content));
         }
     }
 
     private WiseSaying write(String content, String author) {
-        WiseSaying wiseSaying = new WiseSaying();
-        wiseSayings[lastNo] = wiseSaying;
-
+        WiseSaying w1 = new WiseSaying();
+        wiseSayings[lastIndex] = w1;
+        ++lastIndex;
         ++lastNo;
-        wiseSaying.no = lastNo;
-        wiseSaying.content = content;
-        wiseSaying.author = author;
+        w1.no = lastNo;
+        w1.content = content;
+        w1.author = author;
 
-        return wiseSaying;
+        return w1;
     }
 
     private void actionWrite() {
