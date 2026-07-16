@@ -12,13 +12,16 @@ public class Main {
 
         String cmd = "";
         int lastNo = 0;
-        WiseSaying wiseSaying =  new WiseSaying();
+        WiseSaying[] wiseSayings = new WiseSaying[10];
 
         while(!cmd.equals("종료")) {
             System.out.print("명령) ");
             cmd = sc.nextLine();
 
             if(cmd.equals("등록")) {
+
+                WiseSaying wiseSaying = new WiseSaying();
+                wiseSayings[lastNo] = wiseSaying;
 
                 System.out.print("명언 : ");
                 wiseSaying.content = sc.nextLine();
@@ -34,7 +37,10 @@ public class Main {
             if(cmd.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
-                System.out.println("%d / %s / %s.".formatted(wiseSaying.no, wiseSaying.author, wiseSaying.content));
+                for(int i = 0; i < 0; i++) { // 0 시작, lastNo - 1 끝
+                    WiseSaying target = wiseSayings[i];
+                    System.out.println("%d / %s / %s.".formatted(target.no, target.author, target.content));
+                }
             }
 
 
