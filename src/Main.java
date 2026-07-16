@@ -9,9 +9,19 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("== 명언 앱 ==");
-        System.out.print("명령) ");
-        String cmd = sc.nextLine();
 
-        sc.close();
+        String cmd = "";
+
+        while(!cmd.equals("종료")) {
+            System.out.print("명령) ");
+            cmd = sc.nextLine();
+
+            if(cmd.equals("등록")) {
+                System.out.print("명언 : ");
+                String content = sc.nextLine();
+                System.out.print("작가 : ");
+                String author = sc.nextLine();
+            }
+        }
     }
 }
