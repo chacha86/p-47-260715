@@ -38,18 +38,26 @@ public class App {
         }
     }
 
-    private void actionWrite() {
+    private WiseSaying write(String content, String author) {
         WiseSaying wiseSaying = new WiseSaying();
         wiseSayings[lastNo] = wiseSaying;
 
-        System.out.print("명언 : ");
-        wiseSaying.content = sc.nextLine();
-        System.out.print("작가 : ");
-        wiseSaying.author = sc.nextLine();
-        // %d => 숫자
-        // %s => 문자열
         ++lastNo;
         wiseSaying.no = lastNo;
+        wiseSaying.content = content;
+        wiseSaying.author = author;
+
+        return wiseSaying;
+    }
+
+    private void actionWrite() {
+
+        System.out.print("명언 : ");
+        String content = sc.nextLine();
+        System.out.print("작가 : ");
+        String author = sc.nextLine();
+
+        WiseSaying wiseSaying = write(content, author);
         System.out.println("%d번 명언이 등록되었습니다.".formatted(wiseSaying.no));
     }
 }
