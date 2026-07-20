@@ -25,7 +25,49 @@ public class App {
             else if (cmd.startsWith("삭제")) {
                 actionDelete(cmd);
             }
+            else if(cmd.startsWith("수정")) {
+                actionModify(cmd);
+            }
+            else if (!cmd.equals("종료")) {
+                System.out.println("존재하지 않는 명령어입니다.");
+            }
         }
+    }
+
+    private void actionModify(String cmd) {
+        String strId = cmd.substring(cmd.indexOf("=") + 1).trim();
+        int id = Integer.parseInt(strId);
+
+        int targetIdx = -1;
+
+        for(int i = 0; i < lastIndex; i++) {
+            WiseSaying w1 = wiseSayings[i];
+            if(w1.no == id) {
+                targetIdx = i;
+            }
+        }
+
+        if(targetIdx == -1) {
+            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+            return;
+        }
+
+        //수정 로직
+        WiseSaying wiseSaying = wiseSayings[targetIdx];
+
+//        명언(기존) : 과거에 집착하지 마라.
+//                명언 : 현재와 자신을 사랑하라.
+//                작가(기존) : 작자미상
+//        작가 : 홍길동
+
+        System.out.println("명언(기존)): %s".formatted(wiseSaying.content));
+        System.out.print("명언 : ");
+        wiseSaying.content = sc.nextLine();
+
+        System.out.println("작가(기존) : %s".formatted(wiseSaying.author));
+        System.out.print("작가 : ");
+        wiseSaying.author = sc.nextLine();
+
     }
 
     private void actionDelete(String cmd) {
