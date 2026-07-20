@@ -6,12 +6,7 @@ public class App {
     int lastNo = 0; // 가장 최근 생성된 명언 번호. 번호 관리
     int lastIndex = 0; // 가장 최근 생성된 명언의 배열 인덱스. 배열 관리
     WiseSaying[] wiseSayings = new WiseSaying[10];
-    // run 함수가 길다 => 길다.
-    // run 함수는 길이가 적절하다. => 적절하다
-    // run 함수는 충분히 짧다. => 짧다
-    // 코드의 길이는 절대 규칙은 없고 팀 상황에 따라 다르다.
 
-    // 나눌 필요가 있다면 최대한 응집도 있게
     public void run() {
 
         System.out.println("== 명언 앱 ==");
@@ -27,14 +22,31 @@ public class App {
             else if (cmd.equals("목록")) {
                 actionList();
             }
-            else if (cmd.equals("삭제")) {
-                actionDelete();
+            else if (cmd.startsWith("삭제")) {
+                actionDelete(cmd);
             }
         }
     }
 
-    private void actionDelete() {
-        for(int i = 1; i < lastIndex; i++) {
+    private void actionDelete(String cmd) {
+
+        // 삭제?id=4 에서 1만 가져오는 법
+        // =까지 자르고, 그 뒤에 있는 1을 가져오기
+
+
+        String strId = cmd.substring(cmd.indexOf("=") + 1).trim();
+        int id = Integer.parseInt(strId);
+
+        int targetIdx = -1;
+
+        for(int i = 0; i < lastIndex; i++) {
+            WiseSaying w1 = wiseSayings[i];
+            if(w1.no == id) {
+               targetIdx = i;
+            }
+        }
+
+        for(int i = targetIdx; i < lastIndex; i++) {
             wiseSayings[i] = wiseSayings[i + 1];
         }
         --lastIndex;
