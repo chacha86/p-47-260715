@@ -46,6 +46,11 @@ public class App {
             }
         }
 
+        if(targetIdx == -1) {
+            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+            return;
+        }
+
         for(int i = targetIdx; i < lastIndex; i++) {
             wiseSayings[i] = wiseSayings[i + 1];
         }
