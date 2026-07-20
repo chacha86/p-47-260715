@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
 
     Scanner sc = new Scanner(System.in);
-    int lastId = 0; // 가장 최근 생성된 명언 번호. 번호 관리
-    int lastIndex = 0; // 가장 최근 생성된 명언의 배열 인덱스. 배열 관리
-    WiseSaying[] wiseSayings = new WiseSaying[10];
+    int lastId = 0;
+    ArrayList<WiseSaying> wiseSayings = new ArrayList<>();
+
 
     public void run() {
 
@@ -40,8 +41,8 @@ public class App {
 
         int targetIdx = -1;
 
-        for(int i = 0; i < lastIndex; i++) {
-            WiseSaying w1 = wiseSayings[i];
+        for(int i = 0; i < wiseSayings.size(); i++) {
+            WiseSaying w1 = wiseSayings.get(i);
             if(w1.getId() == id) {
                 targetIdx = i;
             }
@@ -53,12 +54,7 @@ public class App {
         }
 
         //수정 로직
-        WiseSaying wiseSaying = wiseSayings[targetIdx];
-
-//        명언(기존) : 과거에 집착하지 마라.
-//                명언 : 현재와 자신을 사랑하라.
-//                작가(기존) : 작자미상
-//        작가 : 홍길동
+        WiseSaying wiseSaying = wiseSayings.get(targetIdx);
 
         System.out.println("명언(기존)): %s".formatted(wiseSaying.getContent()));
         System.out.print("명언 : ");
@@ -74,17 +70,13 @@ public class App {
 
     private void actionDelete(String cmd) {
 
-        // 삭제?id=4 에서 1만 가져오는 법
-        // =까지 자르고, 그 뒤에 있는 1을 가져오기
-
-
         String strId = cmd.substring(cmd.indexOf("=") + 1).trim();
         int id = Integer.parseInt(strId);
 
         int targetIdx = -1;
 
-        for(int i = 0; i < lastIndex; i++) {
-            WiseSaying w1 = wiseSayings[i];
+        for(int i = 0; i < wiseSayings.size(); i++) {
+            WiseSaying w1 = wiseSayings.get(i);
             if(w1.getId() == id) {
                targetIdx = i;
             }
@@ -95,17 +87,14 @@ public class App {
             return;
         }
 
-        for(int i = targetIdx; i < lastIndex; i++) {
-            wiseSayings[i] = wiseSayings[i + 1];
-        }
-        --lastIndex;
+        wiseSayings.remove(targetIdx);
     }
 
     private void actionList() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
-        for (int i = lastIndex - 1; i >= 0; i--) {
-            WiseSaying target = wiseSayings[i];
+        for (int i = wiseSayings.size() - 1; i >= 0; i--) {
+            WiseSaying target = wiseSayings.get(i);
             System.out.println("%d / %s / %s.".formatted(target.getId(), target.getAuthor(), target.getContent()));
         }
     }
@@ -113,9 +102,7 @@ public class App {
     private WiseSaying write(String content, String author) {
         ++lastId;
         WiseSaying w1 = new WiseSaying(lastId, content, author);
-        wiseSayings[lastIndex] = w1;
-
-        ++lastIndex;
+        wiseSayings.add(w1);
 
         return w1;
     }
