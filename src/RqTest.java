@@ -2,11 +2,11 @@ public class RqTest {
 
     public static void main(String[] args) {
 
-        testActionName();
+//        testActionName();
 //        testGetParam();
 
 //        testGetParamEx();
-//                testGetParamEx2();
+        testGetParamEx2();
 //        testGetParamEx3();
     }
 
@@ -20,8 +20,8 @@ public class RqTest {
 
     public static void testGetParamEx2() {
         Rq rq = new Rq("목록?searchKeyword="); // key=value
-        String searchKeyword = rq.getParam("searchKeyword", ""); // ""
-        System.out.println(searchKeyword); // ""
+        String searchKeyword = rq.getParam("searchKeyword", "hello"); // ""
+        System.out.println(searchKeyword); // "hello"
     }
 
     public static void testGetParamEx() {

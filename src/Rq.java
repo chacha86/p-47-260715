@@ -34,12 +34,6 @@ public class Rq {
     }
 
     public String getParam(String key, String defaultValue) {
-        String rst = paramMap.get(key);
-
-        if(rst == null) {
-            return defaultValue;
-        }
-
-        return rst;
+        return paramMap.getOrDefault(key, defaultValue);
     }
 }
