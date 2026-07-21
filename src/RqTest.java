@@ -2,9 +2,32 @@ public class RqTest {
 
     public static void main(String[] args) {
 
-//        testActionName();
-        testGetParam();
+        testActionName();
+//        testGetParam();
 
+//        testGetParamEx();
+//                testGetParamEx2();
+//        testGetParamEx3();
+    }
+
+    public static void testGetParamEx3() {
+        Rq rq = new Rq("목록?searchKeyword=&keyword=kkk"); // key=value
+        String searchKeyword = rq.getParam("searchKeyword", ""); // ""
+        String keyword = rq.getParam("keyword", ""); // ""
+        System.out.println(searchKeyword); // ""
+        System.out.println(keyword); // "kkk"
+    }
+
+    public static void testGetParamEx2() {
+        Rq rq = new Rq("목록?searchKeyword="); // key=value
+        String searchKeyword = rq.getParam("searchKeyword", ""); // ""
+        System.out.println(searchKeyword); // ""
+    }
+
+    public static void testGetParamEx() {
+        Rq rq = new Rq("목록?"); // key=value
+        String searchKeyword = rq.getParam("searchKeyword", ""); // ""
+        System.out.println(searchKeyword); // ""
     }
 
     public static void testGetParam() {

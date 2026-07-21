@@ -3,33 +3,43 @@ import java.util.Map;
 
 public class Rq {
 
-    private String cmd;
+    String actionName;
     Map<String, String> paramMap = new HashMap<>();
 
     public Rq(String cmd) {
-        this.cmd = cmd;
+        String[] cmdBits = cmd.split("\\?");
+        actionName = cmdBits[0];
+        String params = cmdBits.length > 1 ? cmdBits[1] : "";
 
-        // 목록?keywordType=content&keyword=과거
-        String[] cmdBits = cmd.split("\\?"); // ["목록", "keywordType=content&keyword=과거"]
+        if(params.equals("")) {
+            return;
+        }
 
-        String params = cmdBits[1]; //"keywordType=content&keyword=과거&page=1"
-        String[] paramBits = params.split("&"); //["keywordType=content", "keyword=과거", "page=1"]
+        String[] paramBits = params.split("&");
 
         for (String param : paramBits) {
             String[] keyValue = param.split("=");
+
+            if(keyValue.length < 2) {
+                continue;
+            }
+
             paramMap.put(keyValue[0], keyValue[1]);
         }
 
     }
 
     public String getActionName() {
-        // 문자열 쪼개기 -> split
-
-        String[] cmdBits = cmd.split("\\?"); // ?기호를 기준으로 잘라줌. ["삭제", "id=1"]
-        return cmdBits[0];
+        return actionName;
     }
 
     public String getParam(String key, String defaultValue) {
-        return paramMap.get(key);
+        String rst = paramMap.get(key);
+
+        if(rst == null) {
+            return defaultValue;
+        }
+
+        return rst;
     }
 }
