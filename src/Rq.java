@@ -9,23 +9,20 @@ public class Rq {
     public Rq(String cmd) {
         String[] cmdBits = cmd.split("\\?");
         actionName = cmdBits[0];
-        String params = cmdBits.length > 1 ? cmdBits[1] : "";
 
-        if(params.equals("")) {
-            return;
-        }
+        String queryString = cmdBits.length > 1 ? cmdBits[1] : "";
+        String[] queryStringBits = queryString.split("&");
 
-        String[] paramBits = params.split("&");
-
-        for (String param : paramBits) {
-            String[] keyValue = param.split("=");
-
-            if(keyValue.length < 2) {
-                continue;
-            }
-
-            paramMap.put(keyValue[0], keyValue[1]);
-        }
+        paramMap = Arrays.stream(queryStringBits) // key1=value1, key2=value2 ...
+                .map(part -> part.split("="))
+                .filter(bits -> bits.length == 2 && bits[0] != null && bits[1] != null)// [key1, value1]
+                .collect(
+                        Collectors.toMap(
+                                bits -> bits[0],
+                                bits -> bits[1]
+                        )
+                );
+    }
 
     }
 
