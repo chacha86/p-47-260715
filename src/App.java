@@ -35,23 +35,25 @@ public class App {
         }
     }
 
+    //  변하는 부분을 변하지 않는 부분에서 분리해라
+    // 너무 짧거나 너무 긴거 -> 그나마 긴게 나음
+    public int findIndexById(int id) {
+        for(int i = 0; i < wiseSayings.size(); i++) {
+            WiseSaying w1 = wiseSayings.get(i);
+            if(w1.getId() == id) {
+                return i;
+            }
+        }
+
+        return -1;
+
+    }
+
     private void actionModify(String cmd) {
         String strId = cmd.substring(cmd.indexOf("=") + 1).trim();
         int id = Integer.parseInt(strId);
 
-        int targetIdx = -1;
-
-        for(int i = 0; i < wiseSayings.size(); i++) {
-            WiseSaying w1 = wiseSayings.get(i);
-            if(w1.getId() == id) {
-                targetIdx = i;
-            }
-        }
-
-        if(targetIdx == -1) {
-            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
-            return;
-        }
+        int targetIdx = findIndexById(id);
 
         //수정 로직
         WiseSaying wiseSaying = wiseSayings.get(targetIdx);
@@ -73,14 +75,7 @@ public class App {
         String strId = cmd.substring(cmd.indexOf("=") + 1).trim();
         int id = Integer.parseInt(strId);
 
-        int targetIdx = -1;
-
-        for(int i = 0; i < wiseSayings.size(); i++) {
-            WiseSaying w1 = wiseSayings.get(i);
-            if(w1.getId() == id) {
-               targetIdx = i;
-            }
-        }
+        int targetIdx = findIndexById(id);
 
         if(targetIdx == -1) {
             System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
