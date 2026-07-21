@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class App {
 
@@ -19,33 +20,25 @@ public class App {
 
             if (cmd.equals("등록")) {
                 actionWrite(); // mac : option + enter, win : alt + enter
-            }
-            else if (cmd.equals("목록")) {
+            } else if (cmd.equals("목록")) {
                 actionList();
-            }
-            else if (cmd.startsWith("삭제")) {
+            } else if (cmd.startsWith("삭제")) {
                 actionDelete(cmd);
-            }
-            else if(cmd.startsWith("수정")) {
+            } else if (cmd.startsWith("수정")) {
                 actionModify(cmd);
-            }
-            else if (!cmd.equals("종료")) {
+            } else if (!cmd.equals("종료")) {
                 System.out.println("존재하지 않는 명령어입니다.");
             }
         }
     }
 
-    //  변하는 부분을 변하지 않는 부분에서 분리해라
     // 너무 짧거나 너무 긴거 -> 그나마 긴게 나음
     public int findIndexById(int id) {
-        for(int i = 0; i < wiseSayings.size(); i++) {
-            WiseSaying w1 = wiseSayings.get(i);
-            if(w1.getId() == id) {
-                return i;
-            }
-        }
 
-        return -1;
+         return IntStream.range(0, wiseSayings.size())
+                .filter((i) -> wiseSayings.get(i).getId() == id)
+                .findFirst()
+                .orElse(-1);
 
     }
 
@@ -54,6 +47,7 @@ public class App {
         int id = Integer.parseInt(strId);
 
         int targetIdx = findIndexById(id);
+
 
         //수정 로직
         WiseSaying wiseSaying = wiseSayings.get(targetIdx);
@@ -77,7 +71,7 @@ public class App {
 
         int targetIdx = findIndexById(id);
 
-        if(targetIdx == -1) {
+        if (targetIdx == -1) {
             System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
             return;
         }
