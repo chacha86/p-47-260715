@@ -35,7 +35,7 @@ public class App {
     // 너무 짧거나 너무 긴거 -> 그나마 긴게 나음
     public int findIndexById(int id) {
 
-         return IntStream.range(0, wiseSayings.size())
+        return IntStream.range(0, wiseSayings.size())
                 .filter((i) -> wiseSayings.get(i).getId() == id)
                 .findFirst()
                 .orElse(-1);
@@ -69,14 +69,24 @@ public class App {
         String strId = cmd.substring(cmd.indexOf("=") + 1).trim();
         int id = Integer.parseInt(strId);
 
-        int targetIdx = findIndexById(id);
+//        int targetIdx = findIndexById(id);
+//
+//        if (targetIdx == -1) {
+//            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+//            return;
+//        }
 
-        if (targetIdx == -1) {
-            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
-            return;
-        }
+//        wiseSayings.remove(targetIdx);
 
-        wiseSayings.remove(targetIdx);
+       boolean rst = wiseSayings.removeIf(
+               wiseSaying -> wiseSaying.getId() == id
+       );
+
+       if(!rst) {
+           System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+       }
+
+
     }
 
     private void actionList() {
