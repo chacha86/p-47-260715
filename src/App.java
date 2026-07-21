@@ -64,19 +64,10 @@ public class App {
 
     }
 
-    private void actionDelete(String cmd) {
 
+    private void actionDelete(String cmd) {
         String strId = cmd.substring(cmd.indexOf("=") + 1).trim();
         int id = Integer.parseInt(strId);
-
-//        int targetIdx = findIndexById(id);
-//
-//        if (targetIdx == -1) {
-//            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
-//            return;
-//        }
-
-//        wiseSayings.remove(targetIdx);
 
        boolean rst = wiseSayings.removeIf(
                wiseSaying -> wiseSaying.getId() == id
@@ -85,7 +76,6 @@ public class App {
        if(!rst) {
            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
        }
-
 
     }
 
