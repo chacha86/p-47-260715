@@ -6,8 +6,22 @@ public class RqTest {
 //        testGetParam();
 
 //        testGetParamEx();
-        testGetParamEx2();
+//        testGetParamEx2();
 //        testGetParamEx3();
+        testGetParamAsInt();
+    }
+
+    public static void testGetParamAsInt() {
+
+        Rq rq = new Rq("삭제?id=3");
+        int id1 = rq.getParamAsInt("id", -1);
+        System.out.println(id1); //3
+
+        Rq rq2 = new Rq("삭제?id=");
+        int id2 = rq2.getParamAsInt("id", -1);
+
+        System.out.println(id2); // -1
+
     }
 
     public static void testGetParamEx3() {
