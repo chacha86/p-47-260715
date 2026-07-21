@@ -44,6 +44,7 @@ public class Rq {
         try {
             return Integer.parseInt(rst);
         } catch (NumberFormatException e) {
+            System.out.println("잘못된 입력값을 넣어서 기본값으로 반환됩니다.");
             return defaultValue;
         }
     }
