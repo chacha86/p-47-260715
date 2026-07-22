@@ -24,9 +24,13 @@ public class WiseSayingRepository {
     }
 
     public WiseSaying save(WiseSaying wiseSaying) {
-        ++lastId;
-        wiseSaying.setId(lastId);
-        wiseSayings.add(wiseSaying);
+
+        // 번호가 있냐 없냐
+        if(wiseSaying.isNew()) {
+            ++lastId; // 새로 생성되는 명언에게 다음 번호 부여
+            wiseSaying.setId(lastId);
+            wiseSayings.add(wiseSaying);
+        }
 
         return wiseSaying;
     }
