@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class App {
 
-    Scanner sc = new Scanner(System.in);
-    WiseSayingController wiseSayingController = new WiseSayingController();
+    Scanner sc = AppContext.sc;
+    WiseSayingController wiseSayingController = AppContext.wiseSayingController;
 
     public void run() {
 
