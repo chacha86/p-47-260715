@@ -2,12 +2,12 @@ public class RqTest {
 
     public static void main(String[] args) {
 
-//        testActionName();
-//        testGetParam();
+        testActionName();
+        testGetParam();
 
-//        testGetParamEx();
-//        testGetParamEx2();
-//        testGetParamEx3();
+        testGetParamEx();
+        testGetParamEx2();
+        testGetParamEx3();
         testGetParamAsInt();
     }
 

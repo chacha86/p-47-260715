@@ -1,5 +1,7 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Rq {
 
@@ -22,9 +24,9 @@ public class Rq {
                                 bits -> bits[1]
                         )
                 );
-    }
 
     }
+
 
     public String getActionName() {
         return actionName;
