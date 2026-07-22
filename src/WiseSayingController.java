@@ -40,7 +40,6 @@ public class WiseSayingController {
 
     }
 
-
     public void actionDelete(String cmd) {
         String strId = cmd.substring(cmd.indexOf("=") + 1).trim();
         int id = Integer.parseInt(strId);
@@ -57,11 +56,12 @@ public class WiseSayingController {
 
         List<WiseSaying> list = wiseSayingService.findAllIdDesc();
 
-        System.out.println("번호 / 작가 / 명언");
+        System.out.println("번호 / 작가 / 명언 / 작성일 / 마지막 수정일");
         System.out.println("----------------------");
         for (WiseSaying target : list) {
-            System.out.println("%d / %s / %s.".formatted(target.getId(),
-                    target.getAuthor(), target.getContent()));
+            System.out.println("%d / %s / %s / %s / %s".formatted(target.getId(),
+                    target.getAuthor(), target.getContent(),
+                     target.getCreateDate(), target.getModifyDate()));
         }
     }
 

@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -29,8 +30,11 @@ public class WiseSayingRepository {
         if(wiseSaying.isNew()) {
             ++lastId; // 새로 생성되는 명언에게 다음 번호 부여
             wiseSaying.setId(lastId);
+            wiseSaying.setCreateDate(LocalDateTime.now());
             wiseSayings.add(wiseSaying);
         }
+
+        wiseSaying.setModifyDate(LocalDateTime.now());
 
         return wiseSaying;
     }
